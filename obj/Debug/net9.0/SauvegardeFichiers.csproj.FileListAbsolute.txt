@@ -1,0 +1,15 @@
+/Users/jory/Desktop/Cours/M1/Design Patterns/TP/TP-3/SauvegardeFichiers/bin/Debug/net9.0/SauvegardeFichiers
+/Users/jory/Desktop/Cours/M1/Design Patterns/TP/TP-3/SauvegardeFichiers/bin/Debug/net9.0/SauvegardeFichiers.deps.json
+/Users/jory/Desktop/Cours/M1/Design Patterns/TP/TP-3/SauvegardeFichiers/bin/Debug/net9.0/SauvegardeFichiers.runtimeconfig.json
+/Users/jory/Desktop/Cours/M1/Design Patterns/TP/TP-3/SauvegardeFichiers/bin/Debug/net9.0/SauvegardeFichiers.dll
+/Users/jory/Desktop/Cours/M1/Design Patterns/TP/TP-3/SauvegardeFichiers/bin/Debug/net9.0/SauvegardeFichiers.pdb
+/Users/jory/Desktop/Cours/M1/Design Patterns/TP/TP-3/SauvegardeFichiers/obj/Debug/net9.0/SauvegardeFichiers.GeneratedMSBuildEditorConfig.editorconfig
+/Users/jory/Desktop/Cours/M1/Design Patterns/TP/TP-3/SauvegardeFichiers/obj/Debug/net9.0/SauvegardeFichiers.AssemblyInfoInputs.cache
+/Users/jory/Desktop/Cours/M1/Design Patterns/TP/TP-3/SauvegardeFichiers/obj/Debug/net9.0/SauvegardeFichiers.AssemblyInfo.cs
+/Users/jory/Desktop/Cours/M1/Design Patterns/TP/TP-3/SauvegardeFichiers/obj/Debug/net9.0/SauvegardeFichiers.csproj.CoreCompileInputs.cache
+/Users/jory/Desktop/Cours/M1/Design Patterns/TP/TP-3/SauvegardeFichiers/obj/Debug/net9.0/SauvegardeFichiers.sourcelink.json
+/Users/jory/Desktop/Cours/M1/Design Patterns/TP/TP-3/SauvegardeFichiers/obj/Debug/net9.0/SauvegardeFichiers.dll
+/Users/jory/Desktop/Cours/M1/Design Patterns/TP/TP-3/SauvegardeFichiers/obj/Debug/net9.0/refint/SauvegardeFichiers.dll
+/Users/jory/Desktop/Cours/M1/Design Patterns/TP/TP-3/SauvegardeFichiers/obj/Debug/net9.0/SauvegardeFichiers.pdb
+/Users/jory/Desktop/Cours/M1/Design Patterns/TP/TP-3/SauvegardeFichiers/obj/Debug/net9.0/SauvegardeFichiers.genruntimeconfig.cache
+/Users/jory/Desktop/Cours/M1/Design Patterns/TP/TP-3/SauvegardeFichiers/obj/Debug/net9.0/ref/SauvegardeFichiers.dll

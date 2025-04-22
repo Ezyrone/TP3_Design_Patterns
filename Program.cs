@@ -1,11 +1,14 @@
 using System;
 using System.IO;
+using System.Runtime.Intrinsics.Arm;
 
 namespace Backupfiles
 {
     // Interface 
     public interface IFile
     {
+        public string getcontent();
+
         void Save(string path);
     }
 
@@ -13,16 +16,17 @@ namespace Backupfiles
     public class TexteFile : IFile
     {
         private string _content;
+        public string getcontent() => _content;
 
         public TexteFile(string content)
         {
             _content = content;
         }
 
-        public virtual void Save(string chemin)
+        public virtual void Save(string path)
         {
-            File.WriteAllText(chemin, _content);
-            Console.WriteLine($"File saved : {chemin}");
+            File.WriteAllText(path, _content);
+            Console.WriteLine($"File saved : {path}");
         }
     }
 
@@ -30,6 +34,9 @@ namespace Backupfiles
     public abstract class DecoratorFile : IFile
     {
         protected IFile _file;
+        public string content => _file.getcontent();
+
+        string getcontent() => _file.getcontent();
 
         public DecoratorFile(IFile file)
         {
@@ -40,12 +47,34 @@ namespace Backupfiles
         {
             _file.Save(path);
         }
+
+        string IFile.getcontent()
+        {
+            return getcontent();
+        }
     }
 
     
     public class CompressionDecorator : DecoratorFile
     {
-        public CompressionDecorator(IFile file) : base(file) {}
+        public CompressionDecorator(IFile file) : base(file) {
+            int n = file.content.Length;
+            for (int i = 0; i < n; i++)
+            {
+                int count = 1;
+                while (i < n - 1 && file.content[i] == file.content[i + 1])
+                {
+                    count++;
+                    i++;
+                }
+                Console.Write(file.content[i]);
+                if (count > 1)
+                {
+                    Console.Write(count);
+                }
+            }
+
+        }
 
         public override void Save(string path)
         {
@@ -57,23 +86,12 @@ namespace Backupfiles
     
     public class EncryptedDecorator : DecoratorFile
     {
-        public static void EncryptedDecorator(IFile file) : base(file) 
+        public EncryptedDecorator(IFile file) : base(file) 
         {
-            int n = string.Length;
-            for (int i = 0; i < n; i++)
-            {
-                int count = 1;
-                while (i < n - 1 && string[i] == string[i + 1])
-                {
-                    count++;
-                    i++;
-                }
-                Console.Write(string[i]);
-                if (count > 1)
-                {
-                    Console.Write(count);
-                }
-            }
+            Aes aes = Aes.Create();
+            aes.GenerateIV();  
+            aes.GenerateKey();  
+
 
         }
 

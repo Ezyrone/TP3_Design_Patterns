@@ -1,6 +1,7 @@
 using System;
 using System.IO;
-using System.Runtime.Intrinsics.Arm;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 
 namespace Backupfiles
 {
@@ -87,11 +88,7 @@ namespace Backupfiles
     {
         public EncryptedDecorator(IFile file) : base(file) 
         {
-            Aes aes = Aes.Create();
-            aes.GenerateIV();  
-            aes.GenerateKey();  
-
-
+            
         }
 
         public override void Save(string path)

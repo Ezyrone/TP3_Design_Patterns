@@ -1,103 +1,121 @@
 using System;
 using System.IO;
 
-namespace SauvegardeFichiers
+namespace Backupfiles
 {
-    // Interface commune
-    public interface IFichier
+    // Interface 
+    public interface IFile
     {
-        void Enregistrer(string chemin);
+        void Save(string path);
     }
 
-    // Classe de base : FichierTexte
-    public class FichierTexte : IFichier
+    
+    public class TexteFile : IFile
     {
-        private string _contenu;
+        private string _content;
 
-        public FichierTexte(string contenu)
+        public TexteFile(string content)
         {
-            _contenu = contenu;
+            _content = content;
         }
 
-        public virtual void Enregistrer(string chemin)
+        public virtual void Save(string chemin)
         {
-            File.WriteAllText(chemin, _contenu);
-            Console.WriteLine($"Fichier texte enregistré : {chemin}");
-        }
-    }
-
-    // Classe de base pour les décorateurs
-    public abstract class FichierDecorator : IFichier
-    {
-        protected IFichier _fichier;
-
-        public FichierDecorator(IFichier fichier)
-        {
-            _fichier = fichier;
-        }
-
-        public virtual void Enregistrer(string chemin)
-        {
-            _fichier.Enregistrer(chemin);
+            File.WriteAllText(chemin, _content);
+            Console.WriteLine($"File saved : {chemin}");
         }
     }
 
-    // Décorateur : Compression
-    public class CompressionDecorator : FichierDecorator
+    // Décorateurs
+    public abstract class DecoratorFile : IFile
     {
-        public CompressionDecorator(IFichier fichier) : base(fichier) {}
+        protected IFile _file;
 
-        public override void Enregistrer(string chemin)
+        public DecoratorFile(IFile file)
         {
-            base.Enregistrer(chemin);
-            Console.WriteLine("→ Compression du fichier (simulation)");
+            _file = file;
+        }
+
+        public virtual void Save(string path)
+        {
+            _file.Save(path);
         }
     }
 
-    // Décorateur : Chiffrement
-    public class ChiffrementDecorator : FichierDecorator
+    
+    public class CompressionDecorator : DecoratorFile
     {
-        public ChiffrementDecorator(IFichier fichier) : base(fichier) {}
+        public CompressionDecorator(IFile file) : base(file) {}
 
-        public override void Enregistrer(string chemin)
+        public override void Save(string path)
         {
-            base.Enregistrer(chemin);
-            Console.WriteLine("→ Chiffrement du fichier (simulation)");
+            base.Save(path);
+            Console.WriteLine("→ Compressed");
         }
     }
 
-    // Pattern Facade : SauvegardeManager
-    public class SauvegardeManager
+    
+    public class EncryptedDecorator : DecoratorFile
     {
-        public void SauvegarderFichier(string chemin, string contenu)
+        public static void EncryptedDecorator(IFile file) : base(file) 
         {
-            IFichier fichier = new FichierTexte(contenu);
-            fichier = new CompressionDecorator(fichier);
-            fichier = new ChiffrementDecorator(fichier);
+            int n = string.Length;
+            for (int i = 0; i < n; i++)
+            {
+                int count = 1;
+                while (i < n - 1 && string[i] == string[i + 1])
+                {
+                    count++;
+                    i++;
+                }
+                Console.Write(string[i]);
+                if (count > 1)
+                {
+                    Console.Write(count);
+                }
+            }
 
-            fichier.Enregistrer(chemin);
-            Console.WriteLine("✔️ Sauvegarde complète via SauvegardeManager");
+        }
+
+        public override void Save(string path)
+        {
+            base.Save(path);
+            Console.WriteLine("→ Encrypted");
         }
     }
 
-    // Point d'entrée
+    // Facade 
+    public class SaveManager
+    {
+        public void SaveFile(string path, string content)
+        {
+            IFile file = new TexteFile(content);
+            file = new CompressionDecorator(file);
+            file = new EncryptedDecorator(file);
+
+            file.Save(path);
+            Console.WriteLine("✔️ Save completed");
+        }
+    }
+
+    
     class Program
     {
         static void Main(string[] args)
         {
-            string contenu = "Ceci est un fichier très important.";
-            string chemin1 = "sauvegarde_directe.txt";
-            string chemin2 = "sauvegarde_facade.txt";
+            string content = "Important File !";
+            string path1 = "Direct_Save.txt";
+            string path2 = "save_facade.txt";
 
-            Console.WriteLine("=== Test avec décorateurs manuels ===");
-            IFichier fichier = new FichierTexte(contenu);
-            fichier = new CompressionDecorator(fichier);
-            fichier = new ChiffrementDecorator(fichier);
-            fichier.Enregistrer(chemin1);
+            Console.WriteLine("=== Test with manual decorators ===");
+            IFile file = new TexteFile(content);
+            file = new CompressionDecorator(file);
+            file = new EncryptedDecorator(file);
+            file.Save(path1);
 
-            Console.WriteLine("\n=== Test via Facade ===");
-            SauvegardeManager manager = new SauvegardeManager();
-            manager.SauvegarderFichier(chemin2, contenu);
+            Console.WriteLine("\n=== Test Facade ===");
+            SaveManager manager = new SaveManager();
+            manager.SaveFile(path2, content);
         }
     }
 }

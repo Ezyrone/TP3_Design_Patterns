@@ -58,20 +58,19 @@ namespace Backupfiles
     public class CompressionDecorator : DecoratorFile
     {
         public CompressionDecorator(IFile file) : base(file) {
-            int n = file.content.Length;
-            for (int i = 0; i < n; i++)
-            {
+            int n = file.getcontent().Length;
+
+            for (int i = 0; i < n; i++) {
+
                 int count = 1;
-                while (i < n - 1 && file.content[i] == file.content[i + 1])
-                {
+                while (i < n - 1 && file.getcontent()[i] == file.getcontent()[i + 1]) {
                     count++;
                     i++;
                 }
-                Console.Write(file.content[i]);
-                if (count > 1)
-                {
-                    Console.Write(count);
-                }
+
+                Console.Write(file.getcontent()[i]);
+                Console.Write(count);
+
             }
 
         }

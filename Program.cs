@@ -87,27 +87,37 @@ namespace Backupfiles
 
     
     public class EncryptedDecorator : DecoratorFile
+{
+    public EncryptedDecorator(IFile file) : base(file)
     {
-        public EncryptedDecorator(IFile file) : base(file) 
+        string result = string.Empty;
+
+        foreach (char c in file.getcontent())
         {
-            string result;
-
-            char[] result  = new char[file.getcontent.Length];
-
-            foreach (char c in file.getcontent()) {
-
-                
-                
-                
+            if (c >= 'A' && c <= 'Z')
+            {
+                result += (char)('A' + (c - 'A' + 13) % 26);
+            }
+            else if (c >= 'a' && c <= 'z')
+            {
+                result += (char)('a' + (c - 'a' + 13) % 26);
+            }
+            else
+            {
+                result += c;
             }
         }
 
-        public override void Save(string path)
-        {
-            base.Save(path);
-            Console.WriteLine("→ Encrypted");
-        }
+        
+        _file = new TexteFile(result);
     }
+
+    public override void Save(string path)
+    {
+        base.Save(path);
+        Console.WriteLine("→ Encrypted with ROT13");
+    }
+}
 
     // Facade 
     public class SaveManager

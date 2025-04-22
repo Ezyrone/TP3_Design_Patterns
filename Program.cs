@@ -91,10 +91,12 @@ namespace Backupfiles
         public EncryptedDecorator(IFile file) : base(file) 
         {
             string result;
-            
+
+            char[] result  = new char[file.getcontent.Length];
 
             foreach (char c in file.getcontent()) {
 
+                
                 
                 
             }

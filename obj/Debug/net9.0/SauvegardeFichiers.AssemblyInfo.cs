@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SauvegardeFichiers")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+26fccb80fe778851a4da97a04e97eebea715f3e9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e65390cd23685790c0c77109a9aa69ba3d9dab31")]
 [assembly: System.Reflection.AssemblyProductAttribute("SauvegardeFichiers")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SauvegardeFichiers")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

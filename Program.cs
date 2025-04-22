@@ -1,7 +1,9 @@
 using System;
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+
 
 namespace Backupfiles
 {
@@ -88,7 +90,14 @@ namespace Backupfiles
     {
         public EncryptedDecorator(IFile file) : base(file) 
         {
+            string result;
             
+
+            foreach (char c in file.getcontent()) {
+
+                
+                
+            }
         }
 
         public override void Save(string path)
